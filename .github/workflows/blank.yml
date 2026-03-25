@@ -1,0 +1,35 @@
+name: Java Derleme
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java Kurulumu (JDK 17)
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Derleme
+        run: |
+          mkdir -p target
+          javac -d target src/Main.java
+
+      - name: JAR Dosyası Oluşturma
+        run: |
+          jar cf TybgrlBot.jar -C target . plugin.yml
+
+      - name: JAR Dosyasını Kaydetme
+        uses: actions/upload-artifact@v3
+        with:
+          name: TybgrlBot-jar
+          path: TybgrlBot.jar
