@@ -1,0 +1,7 @@
+name: TybgrlBot
+version: 1.0
+main: me.tayyib.Main
+api-version: 1.20
+commands:
+  tybgrlbot:
+    description: Bota emir ver!
